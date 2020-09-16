@@ -1,37 +1,49 @@
+import java.util.Random;
 import java.util.Scanner;
+
 public class Launcher {
 	
-	// TODO: PROCESSING EXAMPLE
-	
-	public static void main(String[] args) {
+	public static void main(String[] args) {	
+		int numTests = 20;
 		
-		Scanner scanner = new Scanner(System.in);  // Create a Scanner object
-		
-		//System.out.println(<your HW-2 class name>.isEven(32)); 
-		//System.out.println(<your HW-2 class name>.isOdd(31)); 
-				
-		int testNum = 0;
-		int maxTests = 10;
-		for (int i = 0; i < maxTests; i++) {
-			System.out.println("Test # "+ (testNum+1) +"...");		
-			doEvenTest(scanner);
-			testNum++;
-		}
-	
+		runUserInputTest(numTests);
+		runPresetTests(numTests);
 	}
 	
-	public static void doEvenTest(Scanner s) {
-		System.out.print("Enter integer here: ");
-		int userInt = s.nextInt(); // gets sample int from user
-		boolean result = es900100hw2.isEven(userInt); // runs isEven with user input
-		isEvenPrompt(userInt,result);
+	public static void runUserInputTest(int numTests) {	
+		Scanner scanner = new Scanner(System.in);  // Create a Scanner object
+		
+		for (int i = 0; i < numTests; i++) {
+			System.out.println("Test # "+(i+1));
+			System.out.print("Enter integer here: ");
+			int userInt = scanner.nextInt(); // gets sample int from user
+			boolean result = es900100hw2.isEven(userInt); // runs isEven with user input
+			isEvenPrompt(userInt,result);	
+		}		
+	}
+	
+	
+	public static void runPresetTests(int numTests) {	
+		Random random = new Random();
+		
+		int[] randTests = new int[numTests];
+		
+		// makes array of 20 random ints
+		for (int i = 0; i < randTests.length; i++) {
+			System.out.println("Test # "+(i+1));
+			randTests[i] = random.nextInt(100);				
+		}
+		
+		for (int i = 0; i < randTests.length; i++) {
+			isEvenPrompt(randTests[i],es900100hw2.isEven(randTests[i]));
+		}		
 	}
 	
 	
 	public static void isEvenPrompt(int inputVal, boolean returnVal) {		
 		String isItEven;
-		if(returnVal == true) {isItEven = "yes";}
-		else {isItEven = "no";}		
+		if(returnVal == true) {isItEven = "Yes!";}
+		else {isItEven = "No!";}		
 		System.out.println("You have entered "+inputVal+". Is this even? "+isItEven);	
 	}
 	
