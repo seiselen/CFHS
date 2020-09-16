@@ -19,6 +19,6 @@
 public class Launcher {
 	public static void main(String[] args) {
 		//System.out.println(<your HW-2 class name>.isEven(32)); 
-		//System.out.println(<your HW-2 class name>es900100hw2.isOdd(31)); 	
+		//System.out.println(<your HW-2 class name>.isOdd(31)); 	
 	}
 }
