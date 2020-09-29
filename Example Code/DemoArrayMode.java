@@ -18,6 +18,7 @@ public class DemoArrayMode {
 	// Using main to run some tests
 	public static void main(String[] args) {
 		
+		// declare variables needed for testing, we'll re-use them
 		int[] test; int expect, actual;
 
 		// control test: expecting [2]
