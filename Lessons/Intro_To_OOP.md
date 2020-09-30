@@ -1,8 +1,8 @@
 # Intro To Object-Oriented Programming
 
 ## Reference / Additional Information:
-* Intro to Programming Paradigms [link](https://cs.lmu.edu/~ray/notes/paradigms/)
-* Intro to (Java) OOP [link](https://www.w3schools.com/java/java_oop.asp)
+* Intro to Programming Paradigms <[link](https://cs.lmu.edu/~ray/notes/paradigms/)>
+* Intro to (Java) OOP <[link](https://www.w3schools.com/java/java_oop.asp)>
 
 ## Intro to Programming Paradigms
 
@@ -19,7 +19,7 @@
 
 ## OOP in Java
 
-w3schools offers some advantages of OOP –vs– Procedural Programming [link](https://www.w3schools.com/java/java_oop.asp), for which we provide some additional insights…
+w3schools [offers some advantages to OOP](https://www.w3schools.com/java/java_oop.asp) –vs– Procedural Programming, for which we provide some additional insights…
  
 * **OOP is faster and easier to execute:** whereas POP can be much more [needlessly] complex as a 'jungle' of control flow statements, etc.
 * **OOP provides a clear structure for programs:** whereas POP can encompass massive and confusing nested code block hierarchies, etc.
