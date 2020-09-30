@@ -19,11 +19,11 @@
 
 ## OOP in Java
 
-w3schools offers some advantages of OOP –vs– Procedural Programming (link)[https://www.w3schools.com/java/java_oop.asp], for which we provide some additional insights…
+w3schools offers some advantages of OOP –vs– Procedural Programming [link](https://www.w3schools.com/java/java_oop.asp), for which we provide some additional insights…
  
-OOP is faster and easier to execute: whereas POP can be much more [needlessly] complex as a 'jungle' of control flow statements, etc.
-OOP provides a clear structure for the programs: whereas POP can encompass massive and confusing nested code block hierarchies, etc.
-OOP helps to keep Java code DRY (Don't Repeat Yourself) and makes the code easier to maintain, modify and debug: whereas the complexity of larger POP code is naturally, oppositely adverse thereto. 
-OOP makes it possible to create full reusable applications with less code and shorter development time: whereas POP, while modular in its own way, can still be much more difficult to decompose, recompose, etc.
+* **OOP is faster and easier to execute:** whereas POP can be much more [needlessly] complex as a 'jungle' of control flow statements, etc.
+* **OOP provides a clear structure for programs:** whereas POP can encompass massive and confusing nested code block hierarchies, etc.
+* **OOP helps keep Java code DRY (Don't Repeat Yourself) and makes it easier to maintain/modify/debug:** whereas the complexity of larger POP code is naturally, oppositely adverse thereto. 
+* **OOP makes it possible to create full reusable applications with less code and shorter development time:** whereas POP, while modular in its own way, can still be much more difficult to decompose, recompose, etc.
 
 
