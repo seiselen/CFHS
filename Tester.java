@@ -21,11 +21,38 @@
 |                    testing methods for HW-3 will be released after the
 |                    HW-2 grading is completed, by means of the GitHub
 |                    version of this source file being updated.
++-----------------------------------------------------------------------
+| To Use:      1) Put this java file in your HW 2/3 project folder (i.e.
+|                 where your HW 2/3 solution code is located. You do NOT
+|                 need to use 'SUtils.java' anymore, as the code needed
+|                 from it has been put into this class! Ergo: you only
+|                 need to bring in THIS FILE to test your code.
 |
-| To Use:      1) Stuff that gets created when this script attaches xor
-|              2) Stuff user has to do to get this thing working
-|              3) Other stuff etc. etc.
+|              2) You will need to rename the class that this code calls
+|                 to run HW 2/3 tests to that of your HW 2/3 class. That
+|                 is: these tests currently call methods in the form:
+|                   "hw2.isEven(...)", etc.
+|                 You will need to rename this to a form such as:
+|                   "es900100hw2.isEven(...)", etc.
 |
+|                 To do this:
+|
+|                 A) Find a place where the hw2 class is being invoked
+|                    in a method call (i.e. "hw2.isEven(samples[i])" 
+|                    on the 8th line of the _isEven() method), then
+|                 B) Right click over the "hw2" part of it, and select
+|                    refactor->rename. This will allow you to type in
+|                    a new name which will replace all other times it
+|                    it exists in the Tester.java code.
+|                 C) Enter the name of your HW 2/3 solution code, i.e.
+|                    my version could be 'es900100hw2', then click the
+|                    enter or return key to set the change. Now, every
+|                    'hw2' should be 'es900100hw2', as for the tester 
+|                    app to now 'see' and call your code.
+|
+|              3) Run the application. You can comment in/out the method
+|                 calls below to run/not-run their respective tests.
++-----------------------------------------------------------------------
 | Deficiency:  > The method 'mapToRange' is not tested. The instructor
 |                will visually inspect the students' code to see if it
 |                follows from the link provided in the HW spec.
@@ -34,16 +61,13 @@
 |                set up yet; thus are not officially available for use.
 |                That said, students could follow the model shown in the 
 |                existing HW-2 test methods, and write their own methods
-|                for the HW-3 tests until the official ones are posted.          
-+-----------------------------------------------------------------------
-| Version: 10/05/20: Original (HW-2 Method Full Support Only)
+|                for the HW-3 tests until the official ones are posted.
 +---------------------------------------------------------------------*/
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
 class Tester {
-	
 	public static void main(String[] args) {
 		Tester test = new Tester();
 		
@@ -67,11 +91,11 @@ class Tester {
 		//test._time12to24();
 		//test._isMealtime();
 		
-		
 		//>>> Part 2A Individual Method Tests
 		//test._far2cel_cel2far();
 		//test._isFreezing();
-		//test._isBoiling();		
+		//test._isBoiling();	
+		
 		//>>> Part 2B Individual Method Tests
 		//test._coord2ToCell();		
 	}
@@ -83,15 +107,17 @@ class Tester {
 		public Object testCase;
 		public Object testParm;
 		public Object expected;
-
+		
 		public STestCase(int val, boolean exp) {
 			this.testCase = new Integer(val);
 			this.expected = new Boolean(exp);
 		}
+		
 		public STestCase(int val, float exp) {
 			this.testCase = new Integer(val); 
 			this.expected = new Float(exp);		
 		}
+		
 		public STestCase(int val, String exp) {
 			this.testCase = new Integer(val);
 			this.expected = exp;		
@@ -196,7 +222,6 @@ class Tester {
 		int[] expect;
 		int[] result;
 		
-		
 		ArrayList<STestCase> tests = new ArrayList<STestCase>();
 		
 		tests.add(new STestCase(1, new int[]{0}));
@@ -209,7 +234,7 @@ class Tester {
 			result = hw2.getEvens((Integer)t.testCase);
 			expect = (int[])t.expected;		
 			if(Arrays.equals(result,expect)) { nPassed++;}
-			else {printFailInfo(""+(Integer)t.testCase,SUtils.intArrString(expect),SUtils.intArrString(result));}		
+			else {printFailInfo(""+(Integer)t.testCase,intArrString(expect),intArrString(result));}		
 		}
 		
 		reportScore(nPassed,tests.size());
@@ -234,7 +259,7 @@ class Tester {
 			result = hw2.getOdds((Integer)t.testCase);
 			expect = (int[])t.expected;		
 			if(Arrays.equals(result,expect)) { nPassed++;}
-			else {printFailInfo(""+(Integer)t.testCase,SUtils.intArrString(expect),SUtils.intArrString(result));}		
+			else {printFailInfo(""+(Integer)t.testCase,intArrString(expect),intArrString(result));}		
 		}
 		
 		reportScore(nPassed,tests.size());
@@ -358,7 +383,7 @@ class Tester {
 		reportScore(nPassed,nTests);
 	} // Ends Method _far2cel_cel2far	
 	
-		
+	
 	public void _isFreezing() {
 		printIntroBlurb("isFreezing");
 		nPassed = 0;
@@ -523,11 +548,14 @@ class Tester {
 			expect = (int[])t.expected;
 					
 			if(Arrays.equals(result, expect)) { nPassed++;}
-			else {printFailInfo(""+inputs[0]+", "+inputs[1]+", "+parm,SUtils.intArrString(expect),SUtils.intArrString(result));}		
+			else {printFailInfo(""+inputs[0]+", "+inputs[1]+", "+parm,intArrString(expect),intArrString(result));}		
 		}
 		
 		reportScore(nPassed,tests.size());	
 	} // Ends Method _coord2ToCell	
+	
+	
+	
 	
 	
 	//##################################################################
@@ -544,7 +572,7 @@ class Tester {
 		char[] dBin = hw2.subBin(pBin, qBin);
 		
 		int sBinAsDec = hw2.binToDec(dBin);				
-		System.out.println("Subtracted "+qDec+" from "+pDec+". Exp: "+dDec+" | Got: "+sBinAsDec+" as char[16] -> "+SUtils.char16AsBinString(dBin));
+		System.out.println("Subtracted "+qDec+" from "+pDec+". Exp: "+dDec+" | Got: "+sBinAsDec+" as char[16] -> "+char16AsBinString(dBin));
 	}	
 	
 	public static void test_addBin(int nTests) {		
@@ -557,7 +585,7 @@ class Tester {
 		char[] sBin = hw2.addBin(pBin, qBin);
 				
 		int sBinAsDec = hw2.binToDec(sBin);
-		System.out.println("Added "+pDec+" to "+qDec+". Exp: "+sDec+" | Got: "+sBinAsDec+" as char[16] -> "+SUtils.char16AsBinString(sBin));
+		System.out.println("Added "+pDec+" to "+qDec+". Exp: "+sDec+" | Got: "+sBinAsDec+" as char[16] -> "+char16AsBinString(sBin));
 	}
 	
 	public static void test_dec2bin_bin2dec(int nTests) {	
@@ -565,7 +593,7 @@ class Tester {
 		short tVal = 7;
 		char [] testDecToBin = hw2.decToBin(tVal);	
 		
-		System.out.println(SUtils.char16AsBinString(testDecToBin));
+		System.out.println(char16AsBinString(testDecToBin));
 
 		short testBinToDec = hw2.binToDec(testDecToBin);	
 		System.out.println(testBinToDec);
@@ -575,7 +603,7 @@ class Tester {
 		// dec2Hex
 		short  valIn = 5281;
 		char[] hexOut = hw2.decToHex(valIn);
-		SUtils.printArray(hexOut);
+		printArray(hexOut);
 		
 		// hex2dec
 		char[] h2d_in = {'1','4','A','1'};		
@@ -587,7 +615,7 @@ class Tester {
 		// hex2bin
 	 	char[] hexIn = {'1','4','A','1'};		
 		char[] binOut = hw2.hexToBin(hexIn);
-		SUtils.printArray(binOut);		
+		printArray(binOut);		
 	}	
 	
 	public static void doBinToHexTest() {
@@ -603,9 +631,6 @@ class Tester {
 		
 		System.out.println();
 	}	
-	
-	
-	
 	
 	
 	//##################################################################
@@ -695,6 +720,74 @@ class Tester {
 	//>>> PRINT / GET-STRING / MISC. UTILS
 	//##################################################################
 	
+	// Prints 'raw' int[16] representation of binary #
+		public static void printBinary(int[] arr){
+			String ret = "";
+			for(int i=0; i<arr.length; i++){
+				if(i==0) {ret+="[";}	
+				if(i>0 && i%4==0){ret+='-';}
+				ret+=arr[i];
+				if(i==arr.length-1){ret+="]";}
+			}
+			System.out.println(ret);
+		}
+		
+		// Produces formatted version of char[16] as binary string
+		public static String char16AsBinString(char[] arr){
+			String ret = "";
+			for(int i=0; i<arr.length; i++){
+				if(i==0) {ret+="[";}	
+				if(i>0 && i%4==0){ret+=' ';}
+				ret = ret + arr[i];
+				if(i==arr.length-1){ret+="]";}
+			}
+			return ret;	
+		}
+		
+		
+		
+		
+		// Gets 1D int array as string
+		public static String intArrString(int[] arr) {
+			String arrAsString = "[";	
+			for (int i = 0; i < arr.length; i++) {
+				arrAsString += arr[i];
+				if(i<arr.length-1) {arrAsString+=", ";}
+			}	
+			return arrAsString+"]";		
+		}
+
+		// Gets 1D int array as string
+		public static String floatArrString(float[] arr) {
+			String arrAsString = "[";	
+			for (int i = 0; i < arr.length; i++) {arrAsString += arr[i];if(i<arr.length-1) {arrAsString+=", ";}}	
+			return arrAsString+"]";		
+		}	
+		
+		
+		// Prints 1D int array
+		public static void printArray(int[] arr) {
+			System.out.println(intArrString(arr));	
+		}
+		
+		
+		
+		// Prints 1D char array
+		public static void printArray(char[] arr) {
+			String arrAsString = "";	
+			for (int i = 0; i < arr.length; i++) {arrAsString += arr[i]; if(i<arr.length-1) {arrAsString+=", ";}	}	
+			System.out.println(arrAsString);		
+		}
+		
+		// Prints 1D float array	
+		public static void printArray(float[] arr){
+			String arrAsString = "";	
+			for (int i = 0; i < arr.length; i++) {arrAsString += arr[i]; if(i<arr.length-1) {arrAsString+=", ";}}	
+			System.out.println(arrAsString);		
+		}	
+	
+	
+	
 	private static void printIntroBlurb(String testName) {
 		System.out.println("Running Tests On Method: <"+testName+">");		
 	}
@@ -722,5 +815,8 @@ class Tester {
 	public static String ratPassed(int n, int p) {return ""+p+"/"+n;}	
 	public static String pctPassed(int n, int p) {return String.format("%.2f", (((float)p/(float)n)*100))+"%";}
 
+	
+	
+	
 
 } // Ends Class Tester
