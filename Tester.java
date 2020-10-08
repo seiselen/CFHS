@@ -1,5 +1,5 @@
 /*----------------------------------------------------------------------
-| Class ClassName
+| Class Tester
 +-----------------------------------------------------------------------
 | Author:  Steven Eiselen, UArizona / CFHS Computer Science
 | Project: FH-4710/4750 FA-20 Homework 2/3
@@ -8,27 +8,14 @@
 |              3 coding projects. The methods of this class allow a user
 |              (i.e. student) to call methods that will test each of the
 |              methods required for definition to determine if they were 
-|              implemented correctly according to the HW spec.
-|
-|              Note that some evaluate more than one HW-2 method (e.g.
-|              '_far2cel_cel2far' will test both farToCel and celToFar),
-|              that there are methods which will test all methods of a 
-|              certain part (e.g. '_1B', '_2A', etc.), and that  test 
-|              method '_HW2' will test all methods of all parts.
-|
-|              NOTE: This version currently fully supports testing the 
-|                    HW-2 methods (i.e. Parts 1 and 2). The remaining
-|                    testing methods for HW-3 will be released after the
-|                    HW-2 grading is completed, by means of the GitHub
-|                    version of this source file being updated.
+|              implemented correctly according to the HW spec. Note that
+|              the methods 'mapToRange'/'arrayAvg'/'arrayTForm' are not
+|              supported, as they will be visually inspected instead.
 +-----------------------------------------------------------------------
 | To Use:      1) Put this java file in your HW 2/3 project folder (i.e.
-|                 where your HW 2/3 solution code is located. You do NOT
-|                 need to use 'SUtils.java' anymore, as the code needed
-|                 from it has been put into this class! Ergo: you only
-|                 need to bring in THIS FILE to test your code.
+|                 where your HW 2/3 solution code is located.
 |
-|              2) You will need to rename the class that this code calls
+|              2) You may need to rename the class that this code calls
 |                 to run HW 2/3 tests to that of your HW 2/3 class. That
 |                 is: these tests currently call methods in the form:
 |                   "hw2.isEven(...)", etc.
@@ -52,16 +39,6 @@
 |
 |              3) Run the application. You can comment in/out the method
 |                 calls below to run/not-run their respective tests.
-+-----------------------------------------------------------------------
-| Deficiency:  > The method 'mapToRange' is not tested. The instructor
-|                will visually inspect the students' code to see if it
-|                follows from the link provided in the HW spec.
-|              > While this code does feature test methods for most HW-3
-|                methods (i.e. Part 3 and 4), they have not been fully
-|                set up yet; thus are not officially available for use.
-|                That said, students could follow the model shown in the 
-|                existing HW-2 test methods, and write their own methods
-|                for the HW-3 tests until the official ones are posted.
 +---------------------------------------------------------------------*/
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -70,9 +47,13 @@ import java.util.Random;
 class Tester {
 	public static void main(String[] args) {
 		Tester test = new Tester();
+			
+		//==============================================================
+		//>>> HW-2 Tester Methods
+		//==============================================================		
 		
 		//>>> Test All Methods Of All Parts
-		test._HW2();
+		//test._HW2();
 		
 		//>>> Test All Methods Of One Part
 		//test._1A();		
@@ -94,11 +75,39 @@ class Tester {
 		//>>> Part 2A Individual Method Tests
 		//test._far2cel_cel2far();
 		//test._isFreezing();
-		//test._isBoiling();	
+		//test._isBoiling();
 		
 		//>>> Part 2B Individual Method Tests
 		//test._coord2ToCell();		
-	}
+
+		
+		//==============================================================
+		//>>> HW-3 Tester Methods
+		//==============================================================
+		
+		//>>> Part 3A Individual Method Tests
+		// TODO: _binToHex();
+		// TODO: _hexToBin();
+		// TODO: _decToHex();
+		// TODO: _decToBin();
+		// TODO: _binToDec();
+		// TODO: _hexToDec();
+
+	
+		//>>> Part 3B Individual Method Tests		
+		// TODO: _addBin();
+		// TODO: _negateBin();
+		// TODO: _subBin();
+
+		
+		//>>> Part 4A Individual Method Tests
+		//test._arrayMin();
+		//test._arrayMax();
+		//test._arrayRange();
+		//test._arrayMode();
+		
+		
+	} // Ends Main Method [Tester]
 		
 	//##################################################################
 	//>>> TEST CASE INNER CLASS
@@ -128,6 +137,11 @@ class Tester {
 			this.expected = exp;		
 		}	
 
+		public STestCase(int[] val, int exp) {
+			this.testCase = val;
+			this.expected = new Integer(exp);		
+		}
+		
 		public STestCase(String val, String exp) {
 			this.testCase = val;
 			this.expected = exp;		
@@ -156,7 +170,8 @@ class Tester {
 	
 	private int[] samples;
 	
-	private int nTests = 50;
+	private int nTests    = 50;
+	private int nTestsArr = 10;
 	
 	//##################################################################
 	//>>> Constructors
@@ -164,17 +179,22 @@ class Tester {
 	public Tester() {random = new Random();}
 	public Tester(int seed) {random = new Random(seed);}
 	
-	
 	//##################################################################
 	//>>> Bulk Test Methods
 	//##################################################################		
 	
+	//>>> FOR HW-2
 	public void _HW2(){_1A();_1B();_2A();_2B();}
 	
 	public void _1A(){_isEven();_isOdd();_getEvens();_getOdds();}	
 	public void _1B(){_time24to12();_time12to24();_isMealtime();}
 	public void _2A(){_far2cel_cel2far();_isFreezing();_isBoiling();}
 	public void _2B(){_coord2ToCell();}
+	
+	
+	//>>> FOR HW-3
+	
+	public void _4A(){_arrayMin();_arrayMax();_arrayRange();_arrayMode();}
 	
 	
 	//##################################################################
@@ -556,6 +576,10 @@ class Tester {
 	
 	
 	
+
+	
+	
+	
 	
 	
 	//##################################################################
@@ -635,84 +659,97 @@ class Tester {
 	
 	//##################################################################
 	//>>> Part 4-A Tests
-	//##################################################################		
+	//##################################################################
 	
-	public static void doArrayStatsTests(int arrSize, int nTests) {
+	public void _arrayMin(){
+		printIntroBlurb("arrayMin");
+		nPassed = 0; int expect; int result;
 		
-		Random random = new Random();
-		
-		int[] arr = new int[arrSize];
-		
-		int minRet; int minExp; int minPassed = 0;
-		int maxRet; int maxExp; int maxPassed = 0;
-		int rgeRet; int rgeExp; int rgePassed = 0;	
-	
-		System.out.println("Array Min/Max/Range Tests...");
-		for (int i = 0; i < nTests; i++) {		
-	
-			for (int j = 0; j < arr.length; j++) {arr[j] = random.nextInt(100);}
-		
-			minRet = hw2.arrayMin(arr);
-			maxRet = hw2.arrayMax(arr);
-			rgeRet = hw2.arrayRange(arr);
-			
-			Arrays.sort(arr);
-			minExp = arr[0];
-			maxExp = arr[arrSize-1];
-			rgeExp = maxExp-minExp;			
-			
-			if(minExp==minRet) {minPassed++;}
-			if(maxExp==maxRet) {maxPassed++;}
-			if(rgeExp==rgeRet) {rgePassed++;}
-			
+		int[] arr = new int[nTests];	
+		for (int i = 0; i < nTestsArr; i++) {			
+			for (int j = 0; j < arr.length; j++) {arr[j] = random.nextInt(800)-400;}	
+			result = hw2.arrayMin(arr);		
+			Arrays.sort(arr);	
+			expect = arr[0];
+				
+			if(result==expect) {nPassed++;}
+			else {printFailInfo(intArrString(arr), ""+expect, ""+result);}	
 		}
-		String blurb = "";		
-		blurb += " arrayMin: ";		
-		blurb += ((minPassed==nTests) ? "All" : (minPassed+"/"+nTests))+" Tests Passed.";
-		System.out.println(blurb);
+		reportScore(nPassed,nTestsArr);			
+	} // Ends Method _arrayMin	
+	
+	public void _arrayMax(){
+		printIntroBlurb("arrayMax");
+		nPassed = 0; int expect; int result;
 		
-		blurb = "";		
-		blurb += " arrayMax: ";		
-		blurb += ((maxPassed==nTests) ? "All" : (maxPassed+"/"+nTests))+" Tests Passed.";
-		System.out.println(blurb);
+		int[] arr = new int[nTests];	
+		for (int i = 0; i < nTestsArr; i++) {			
+			for (int j = 0; j < arr.length; j++) {arr[j] = random.nextInt(800)-400;}	
+			result = hw2.arrayMax(arr);		
+			Arrays.sort(arr);	
+			expect = arr[nTests-1];
+				
+			if(result==expect) {nPassed++;}
+			else {printFailInfo(intArrString(arr), ""+expect, ""+result);}	
+		}
+		reportScore(nPassed,nTestsArr);			
+	} // Ends Method _arrayMax		
+
+	public void _arrayRange(){
+		printIntroBlurb("arrayRange");
+		nPassed = 0; int expect; int result;
 		
-		blurb = "";		
-		blurb += " arrayAvg: ";		
-		blurb += ((maxPassed==nTests) ? "All" : (maxPassed+"/"+nTests))+" Tests Passed.";
-		System.out.println(blurb);		
-					
-		blurb = "";		
-		blurb += " arrayRange: ";		
-		blurb += ((rgePassed==nTests) ? "All" : (rgePassed+"/"+nTests))+" Tests Passed.";
-		System.out.println(blurb);		
+		int[] arr = new int[nTests];	
+		for (int i = 0; i < nTestsArr; i++) {			
+			for (int j = 0; j < arr.length; j++) {arr[j] = random.nextInt(800)-400;}
+						
+			result = hw2.arrayRange(arr);		
+			Arrays.sort(arr);	
+			expect = arr[nTests-1]-arr[0];
+				
+			if(result==expect) {nPassed++;}
+			else {printFailInfo(intArrString(arr), ""+expect, ""+result);}	
+		}
+		reportScore(nPassed,nTestsArr);			
+	} // Ends Method _arrayRange	
+				
+	public void _arrayMode() {
+		printIntroBlurb("arrayMode");
+		nPassed = 0;
+		
+		int expect; int result;
+				
+		ArrayList<STestCase> tests = new ArrayList<STestCase>();
+		
+		// Controls
+		tests.add(new STestCase(new int[]{9001},9001));
+		tests.add(new STestCase(new int[]{0,0,1,2,3,4,5,10,9,8,7,6},0));
+		tests.add(new STestCase(new int[]{1,2,3,4,17,19,23,29,31,2},2));		
+		tests.add(new STestCase(new int[]{516,631,520,480,212,718,520},520));
+		
+		// All-Unique
+		tests.add(new STestCase(new int[]{1,2,3,4,5,6,7,8,9,10},-1));
+		tests.add(new STestCase(new int[]{516,631,520,480,212,718},-1));
+
+		// 2-Way Tie
+		tests.add(new STestCase(new int[]{1,2,2,2,3,5,5,5,6},-1));
+		tests.add(new STestCase(new int[]{2,1,3,5,7,6,9,11,13,2,15,17,19,6,21},-1));
+		
+		// 3-Way Tie
+		tests.add(new STestCase(new int[]{1,1,2,3,4,3,5,8,8,9},-1));
+		tests.add(new STestCase(new int[]{1,1,1,2,2,2,5,5,5},-1));
 			
-	} // Ends Method doArrayStatsTests
-	
+		for (STestCase t : tests) {
+			result = hw2.arrayMode((int[])t.testCase);
+			expect = (int)t.expected;
+				
+			if(result==expect) { nPassed++;}
+			else {printFailInfo(""+t.testCase,""+expect,""+result);}		
+		}		
 		
-	public static void test_ArrayMode(int nTests) {
-		int[] test;
-
-		// control test: expecting [2]
-		test = new int[]{1,2,3,4,17,19,23,29,31,2};
-		arrayModePrintBlurb(2,hw2.arrayMode(test));
-
-		// all-unique test: expecting -1
-		test = new int[]{1,2,3,4,5,6,7,8,9,10};
-		arrayModePrintBlurb(-1,hw2.arrayMode(test));
-
-		// two-way tie test: expecting -1
-		test = new int[]{1,2,2,2,3,5,5,5,6};
-		arrayModePrintBlurb(-1,hw2.arrayMode(test));		
-		
-		// three-way tie test: expecting -1
-		test = new int[]{1,1,2,3,4,3,5,8,8,9};
-		arrayModePrintBlurb(-1,hw2.arrayMode(test));	
-	}
+		reportScore(nPassed,tests.size());		
+	} // Ends Method _arrayMode
 	
-	public static void arrayModePrintBlurb(int exp, int act) {
-		System.out.println("arrayMode test >>> Expect:"+String.format("%3d", exp)+" | Actual:"+String.format("%3d", act));
-	} // Ends Method arrayModePrintBlurb
-
 	
 	
 	
@@ -808,7 +845,6 @@ class Tester {
 		blurb += "\n  Returned:  "+got;
 		System.err.println(blurb);
 	}
-	
 	
 	// Utils for formatting/printing test results
 	public static void reportScore(int p, int n) {System.out.println(" > Results: "+ratPassed(n,p)+" Passed ("+pctPassed(n,p)+")");}
