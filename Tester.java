@@ -878,21 +878,21 @@ class Tester {
 	// Populates Bin Samples Hashmap
 	// 0,1,-1,212,-212,480,-480,516,-516,520,-520,631,-631,718,-718
 	private void populateBinSamples() {
-		binSamples.put(   0, hw2.decToBin((short)0));
-		binSamples.put(   1, hw2.decToBin((short)1));
-		binSamples.put(  -1, hw2.negateBin(hw2.decToBin((short)1)));
-		binSamples.put( 212, hw2.decToBin((short)212));
-		binSamples.put(-212, hw2.negateBin(hw2.decToBin((short)212)));
-		binSamples.put( 480, hw2.decToBin((short)480));
-		binSamples.put(-480, hw2.negateBin(hw2.decToBin((short)480)));
-		binSamples.put( 516, hw2.decToBin((short)516));
-		binSamples.put(-516, hw2.negateBin(hw2.decToBin((short)516)));
-		binSamples.put( 520, hw2.decToBin((short)520));
-		binSamples.put(-520, hw2.negateBin(hw2.decToBin((short)520)));
-		binSamples.put( 631, hw2.decToBin((short)631));
-		binSamples.put(-631, hw2.negateBin(hw2.decToBin((short)631)));
-		binSamples.put( 718, hw2.decToBin((short)718));
-		binSamples.put(-718, hw2.negateBin(hw2.decToBin((short)718)));
+		binSamples.put(   0, new char[]{'0','0','0','0', '0','0','0','0', '0','0','0','0', '0','0','0','0'});
+		binSamples.put(   1, new char[]{'0','0','0','0', '0','0','0','0', '0','0','0','0', '0','0','0','1'});
+		binSamples.put(  -1, new char[]{'1','1','1','1', '1','1','1','1', '1','1','1','1', '1','1','1','1'});
+		binSamples.put( 212, new char[]{'0','0','0','0', '0','0','0','0', '1','1','0','1', '0','1','0','0'});
+		binSamples.put(-212, new char[]{'1','1','1','1', '1','1','1','1', '0','0','1','0', '1','1','0','0'});
+		binSamples.put( 480, new char[]{'0','0','0','0', '0','0','0','1', '1','1','1','0', '0','0','0','0'});
+		binSamples.put(-480, new char[]{'1','1','1','1', '1','1','1','0', '0','0','1','0', '0','0','0','0'});
+		binSamples.put( 516, new char[]{'0','0','0','0', '0','0','1','0', '0','0','0','0', '0','1','0','0'});
+		binSamples.put(-516, new char[]{'1','1','1','1', '1','1','0','1', '1','1','1','1', '1','1','0','0'});
+		binSamples.put( 520, new char[]{'0','0','0','0', '0','0','1','0', '0','0','0','0', '1','0','0','0'});
+		binSamples.put(-520, new char[]{'1','1','1','1', '1','1','0','1', '1','1','1','1', '1','0','0','0'});
+		binSamples.put( 631, new char[]{'0','0','0','0', '0','0','1','0', '0','1','1','1', '0','1','1','1'});
+		binSamples.put(-631, new char[]{'1','1','1','1', '1','1','0','1', '1','0','0','0', '1','0','0','1'});
+		binSamples.put( 718, new char[]{'0','0','0','0', '0','0','1','0', '1','1','0','0', '1','1','1','0'});
+		binSamples.put(-718, new char[]{'1','1','1','1', '1','1','0','1', '0','0','1','1', '0','0','1','0'});		
 	}
 	
 	private char[] numsToCharArr(String vals) {
