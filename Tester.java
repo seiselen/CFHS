@@ -42,18 +42,22 @@
 +---------------------------------------------------------------------*/
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Random;
 
 class Tester {
+	
+	HashMap<Integer, char[]> binSamples = new HashMap<Integer,char[]>();
+
 	public static void main(String[] args) {
 		Tester test = new Tester();
-			
+		
 		//==============================================================
 		//>>> HW-2 Tester Methods
-		//==============================================================		
+		//==============================================================	
 		
 		//>>> Test All Methods Of All Parts
-		//test._HW2();
+		test._HW2();
 		
 		//>>> Test All Methods Of One Part
 		//test._1A();		
@@ -84,29 +88,30 @@ class Tester {
 		//==============================================================
 		//>>> HW-3 Tester Methods
 		//==============================================================
-		
-		//>>> Part 3A Individual Method Tests
-		// TODO: _binToHex();
-		// TODO: _hexToBin();
-		// TODO: _decToHex();
-		// TODO: _decToBin();
-		// TODO: _binToDec();
-		// TODO: _hexToDec();
 
+		//>>> Test All Methods Of All Parts
+		test._HW3();
+		
+		//>>> Test All Methods Of One Part
+		//test._3A();		
+		//test._3B();		
+		//test._4A();		
 	
-		//>>> Part 3B Individual Method Tests		
-		// TODO: _addBin();
-		// TODO: _negateBin();
-		// TODO: _subBin();
+		//>>> Part 3A Individual Method Tests
+		//test._dec2Bin_bin2Dec();
+		//test._dec2Hex_hex2Dec();
+		//test._bin2Hex_hex2Bin();
 
-		
+		//>>> Part 3B Individual Method Tests		
+		//test._addBin();
+		//test._negateBin();
+	
 		//>>> Part 4A Individual Method Tests
 		//test._arrayMin();
 		//test._arrayMax();
 		//test._arrayRange();
 		//test._arrayMode();
-		
-		
+			
 	} // Ends Main Method [Tester]
 		
 	//##################################################################
@@ -145,7 +150,18 @@ class Tester {
 		public STestCase(String val, String exp) {
 			this.testCase = val;
 			this.expected = exp;		
-		}	
+		}
+		
+		public STestCase(char[] val, char[] exp) {
+			this.testCase = val;
+			this.expected = exp;		
+		}
+		
+		public STestCase(char[] val, char[] parm, char[] exp) {
+			this.testCase = val;
+			this.testParm = parm;
+			this.expected = exp;		
+		}
 		
 		public STestCase(float val, char parm, boolean exp) {
 			this.testCase = new Float(val);
@@ -160,7 +176,6 @@ class Tester {
 		}	
 		
 	} // Ends Class TestCase
-
 	
 	//##################################################################
 	//>>> Data Structure Declarations
@@ -176,8 +191,8 @@ class Tester {
 	//##################################################################
 	//>>> Constructors
 	//##################################################################	
-	public Tester() {random = new Random();}
-	public Tester(int seed) {random = new Random(seed);}
+	public Tester() {random = new Random(); populateBinSamples();}
+	public Tester(int seed) {random = new Random(seed); populateBinSamples();}
 	
 	//##################################################################
 	//>>> Bulk Test Methods
@@ -191,16 +206,16 @@ class Tester {
 	public void _2A(){_far2cel_cel2far();_isFreezing();_isBoiling();}
 	public void _2B(){_coord2ToCell();}
 	
-	
 	//>>> FOR HW-3
-	
+	public void _HW3(){_3A();_3B();_4A();}
+	public void _3A(){_dec2Bin_bin2Dec();_dec2Hex_hex2Dec();_bin2Hex_hex2Bin();}
+	public void _3B(){_addBin();_negateBin();}
 	public void _4A(){_arrayMin();_arrayMax();_arrayRange();_arrayMode();}
-	
 	
 	//##################################################################
 	//>>> Part 1-A Tests
 	//##################################################################	
-	public void _isEven() {		
+	public void _isEven() {
 		printIntroBlurb("isEven");
 		
 		samples = new int[nTests];
@@ -212,13 +227,11 @@ class Tester {
 			else {printFailInfo(""+samples[i],""+true,""+false);}
 			if(hw2.isEven(samples[i]+1)==false) {nPassed++;}	
 			else {printFailInfo(""+(samples[i]+1),""+false,""+true);}		
-		}
-		
+		}	
 		reportScore(nPassed,nTests*2);	
 	} // Ends Method _isEven
 	
-
-	public void _isOdd() {		
+	public void _isOdd() {
 		printIntroBlurb("isOdd");
 		
 		samples = new int[nTests];
@@ -230,12 +243,10 @@ class Tester {
 			else {printFailInfo(""+(samples[i]+1),""+true,""+false);}
 			if(hw2.isOdd(samples[i])==false) {nPassed++;}	
 			else {printFailInfo(""+samples[i],""+false,""+true);}		
-		}
-		
+		}	
 		reportScore(nPassed,nTests*2);	
 	} // Ends Method _isOdd	
-	
-	
+		
 	public void _getEvens() {
 		printIntroBlurb("getEvens");
 		nPassed = 0;
@@ -255,12 +266,10 @@ class Tester {
 			expect = (int[])t.expected;		
 			if(Arrays.equals(result,expect)) { nPassed++;}
 			else {printFailInfo(""+(Integer)t.testCase,intArrString(expect),intArrString(result));}		
-		}
-		
+		}		
 		reportScore(nPassed,tests.size());
 	} // Ends Method _getEvens	
-	
-		
+			
 	public void _getOdds() {
 		printIntroBlurb("getOdds");
 		nPassed = 0;
@@ -280,11 +289,9 @@ class Tester {
 			expect = (int[])t.expected;		
 			if(Arrays.equals(result,expect)) { nPassed++;}
 			else {printFailInfo(""+(Integer)t.testCase,intArrString(expect),intArrString(result));}		
-		}
-		
+		}	
 		reportScore(nPassed,tests.size());
-	} // Ends Method _getEvens		
-	
+	} // Ends Method _getOdds		
 	
 	//##################################################################
 	//>>> Part 1-B Tests
@@ -314,10 +321,8 @@ class Tester {
 			if(result.equals(expect)) { nPassed++;}
 			else {printFailInfo((String)t.testCase,expect,result);}		
 		}
-		
 		reportScore(nPassed,tests.size());		
 	} // Ends Method _time24to12		
-	
 	
 	public void _time12to24() {
 		printIntroBlurb("time12to24");
@@ -343,12 +348,10 @@ class Tester {
 			expect = (String)t.expected;		
 			if(result.equals(expect)) { nPassed++;}
 			else {printFailInfo((String)t.testCase,expect,result);}		
-		}
-		
+		}	
 		reportScore(nPassed,tests.size());	
 	} // Ends Method _time12to24	
 	
-
 	public void _isMealtime() {
 		printIntroBlurb("isMealtime");
 		nPassed = 0;
@@ -380,16 +383,14 @@ class Tester {
 			expect = (String)t.expected;		
 			if(result.equals(expect)) { nPassed++;}
 			else {printFailInfo((String)t.testCase,expect,result);}		
-		}
-		
+		}	
 		reportScore(nPassed,tests.size());
 	} // Ends Method _isMealtime	
-	
 
 	//##################################################################
 	//>>> Part 2-A Tests
 	//##################################################################
-	public void _far2cel_cel2far() {	
+	public void _far2cel_cel2far() {
 		printIntroBlurb("farToCel> and <celToFar");
 		
 		samples = new int[nTests];
@@ -402,7 +403,6 @@ class Tester {
 		
 		reportScore(nPassed,nTests);
 	} // Ends Method _far2cel_cel2far	
-	
 	
 	public void _isFreezing() {
 		printIntroBlurb("isFreezing");
@@ -449,8 +449,7 @@ class Tester {
 		
 		reportScore(nPassed,tests.size());		
 	} // Ends Method _isFreezing	
-	
-	
+		
 	public void _isBoiling() {
 		printIntroBlurb("isBoiling");
 		nPassed = 0;
@@ -496,7 +495,6 @@ class Tester {
 		
 		reportScore(nPassed,tests.size());		
 	} // Ends Method _isBoiling		
-	
 	
 	//##################################################################
 	//>>> Part 2-B Tests
@@ -569,98 +567,125 @@ class Tester {
 					
 			if(Arrays.equals(result, expect)) { nPassed++;}
 			else {printFailInfo(""+inputs[0]+", "+inputs[1]+", "+parm,intArrString(expect),intArrString(result));}		
-		}
-		
+		}		
 		reportScore(nPassed,tests.size());	
 	} // Ends Method _coord2ToCell	
 	
-	
-	
-
-	
-	
-	
-	
-	
 	//##################################################################
-	//>>> Part 3 (SUBPARTS 'A' AND 'B') Tests
+	//>>> Part 3-A Tests
 	//##################################################################		
-	
-	public static void test_subBin(int nTests) {
-		short pDec  = 516;
-		short qDec  = 480;
-		short dDec  = (short)(pDec-qDec);
+	public void _dec2Bin_bin2Dec() {
+		printIntroBlurb("decToBin> and <binToDec");
+		nPassed = 0;			
+		short tVal; char[] toBin; short toDec;
 		
-		char[] pBin = hw2.decToBin(pDec);
-		char[] qBin = hw2.decToBin(qDec);		
-		char[] dBin = hw2.subBin(pBin, qBin);
-		
-		int sBinAsDec = hw2.binToDec(dBin);				
-		System.out.println("Subtracted "+qDec+" from "+pDec+". Exp: "+dDec+" | Got: "+sBinAsDec+" as char[16] -> "+char16AsBinString(dBin));
-	}	
-	
-	public static void test_addBin(int nTests) {		
-		short pDec  = 516;
-		short qDec  = 631;
-		short sDec  = (short)(pDec+qDec);
-		
-		char[] pBin = hw2.decToBin(pDec);
-		char[] qBin = hw2.decToBin(qDec);
-		char[] sBin = hw2.addBin(pBin, qBin);
-				
-		int sBinAsDec = hw2.binToDec(sBin);
-		System.out.println("Added "+pDec+" to "+qDec+". Exp: "+sDec+" | Got: "+sBinAsDec+" as char[16] -> "+char16AsBinString(sBin));
-	}
-	
-	public static void test_dec2bin_bin2dec(int nTests) {	
-		// Demonstrates a single test
-		short tVal = 7;
-		char [] testDecToBin = hw2.decToBin(tVal);	
-		
-		System.out.println(char16AsBinString(testDecToBin));
+		for (int i = 0; i < nTests; i++) {		
+			tVal  = (short)random.nextInt(5000);		
+			toBin = hw2.decToBin(tVal);
+			toDec = hw2.binToDec(toBin);
+			
+			if(tVal==toDec) {nPassed++;}
+			else {printFailInfo(""+tVal,""+tVal,""+toDec);}		
+		}
+		reportScore(nPassed,nTests);	
+	} // Ends Method _dec2Bin_bin2Dec	
 
-		short testBinToDec = hw2.binToDec(testDecToBin);	
-		System.out.println(testBinToDec);
-	}
-	
-	public static void test_dec2hex_hex2dec(int nTests) {
-		// dec2Hex
-		short  valIn = 5281;
-		char[] hexOut = hw2.decToHex(valIn);
-		printArray(hexOut);
+	public void _dec2Hex_hex2Dec() {
+		printIntroBlurb("decToHex> and <hexToDec");
+		nPassed = 0;			
+		short tVal; char[] toHex; short toDec;
 		
-		// hex2dec
-		char[] h2d_in = {'1','4','A','1'};		
-		int h2d_out = hw2.hexToDec(h2d_in);
-		System.out.println(h2d_out);			
-	}	
+		for (int i = 0; i < nTests; i++) {		
+			tVal  = (short)random.nextInt(5000);		
+			toHex = hw2.decToHex(tVal);
+			toDec = hw2.hexToDec(toHex);
+			
+			if(tVal==toDec) {nPassed++;}
+			else {printFailInfo(""+tVal,""+tVal,""+toDec);}		
+		}
+		reportScore(nPassed,nTests);	
+	} // Ends Method _dec2Hex_hex2Dec
 	
-	public static void test_hex2bin_bin2hex(int nTests) {	
-		// hex2bin
-	 	char[] hexIn = {'1','4','A','1'};		
-		char[] binOut = hw2.hexToBin(hexIn);
-		printArray(binOut);		
-	}	
+	public void _bin2Hex_hex2Bin() {
+		printIntroBlurb("bin2Hex> and <hex2Bin");
+		nPassed = 0;			
+		short tVal; char[] asBin; char[] toBin; char[] toHex;
+		
+		for (int i = 0; i < nTests; i++) {		
+			tVal  = (short)random.nextInt(5000);
+			
+			asBin = hw2.decToBin(tVal);
+			toHex = hw2.binToHex(asBin);		
+			toBin = hw2.hexToBin(toHex);
+			
+			if(Arrays.equals(asBin, toBin)) {nPassed++;}
+			else {printFailInfo(""+tVal,binArrString(asBin),binArrString(toBin));}		
+		}
+		reportScore(nPassed,nTests);	
+	} // Ends Method _dec2Hex_hex2Dec	
+
+	//##################################################################
+	//>>> Part 3-B Tests
+	//##################################################################	
+	public void _addBin(){
+		printIntroBlurb("addBin");
+		nPassed = 0;	
+		char[] expect, result, operL, operR;
+		
+		ArrayList<STestCase> tests = new ArrayList<STestCase>();
+		tests.add(new STestCase(binSamples.get(0),binSamples.get(1),numsToCharArr("0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,1")));
+		tests.add(new STestCase(binSamples.get(1),binSamples.get(-1),numsToCharArr("0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0")));				
+		tests.add(new STestCase(binSamples.get(520),binSamples.get(0),numsToCharArr("0,0,0,0, 0,0,1,0, 0,0,0,0, 1,0,0,0")));	
+		tests.add(new STestCase(binSamples.get(631),binSamples.get(718),numsToCharArr("0,0,0,0, 0,1,0,1, 0,1,0,0, 0,1,0,1")));
+		tests.add(new STestCase(binSamples.get(516),binSamples.get(480),numsToCharArr("0,0,0,0, 0,0,1,1, 1,1,1,0, 0,1,0,0")));
+		tests.add(new STestCase(binSamples.get(-480),binSamples.get(-212),numsToCharArr("1,1,1,1, 1,1,0,1, 0,1,0,0, 1,1,0,0")));	
+		tests.add(new STestCase(binSamples.get(-718),binSamples.get(-631),numsToCharArr("1,1,1,1, 1,0,1,0, 1,0,1,1, 1,0,1,1")));	
+		tests.add(new STestCase(binSamples.get(-520),binSamples.get(480),numsToCharArr("1,1,1,1, 1,1,1,1, 1,1,0,1, 1,0,0,0")));		
+		tests.add(new STestCase(binSamples.get(-480),binSamples.get(516),numsToCharArr("0,0,0,0, 0,0,0,0, 0,0,1,0, 0,1,0,0")));
+		tests.add(new STestCase(binSamples.get(718),binSamples.get(718),numsToCharArr("0,0,0,0, 0,1,0,1, 1,0,0,1, 1,1,0,0")));	
+		
+		for (STestCase t : tests) {	
+			operL = (char[])t.testCase;
+			operR = (char[])t.testParm;				
+			result = hw2.addBin(operL,operR);
+			expect = (char[])t.expected;		
+			if(Arrays.equals(result,expect)){ nPassed++;}
+			else {printFailInfo(binArrString(operL),binArrString(operR),binArrString(expect),binArrString(result));}		
+		}
+		reportScore(nPassed,tests.size());					
+	} // Ends Method _addBin
 	
-	public static void doBinToHexTest() {
-		// 1110 0010 0100 0000 = E240 = 57,920
-		char [] test = {'1','1','1','0', '0','0','1','0', '0','1','0','0' ,'0','0','0','0'};
+	public void _negateBin(){
+		printIntroBlurb("negateBin");
+		nPassed = 0;	
+		char[] expect, result, test;
 		
-		// expecting char[4] of hex chars , specifically 'E','2','4','0'
-		char[] result = hw2.binToHex(test);
+		ArrayList<STestCase> tests = new ArrayList<STestCase>();
+		tests.add(new STestCase(binSamples.get(0),binSamples.get(0)));	
+		tests.add(new STestCase(binSamples.get(1),binSamples.get(-1)));	
+		tests.add(new STestCase(binSamples.get(-1),binSamples.get(1)));	
+		tests.add(new STestCase(binSamples.get(480),binSamples.get(-480)));			
+		tests.add(new STestCase(binSamples.get(-480),binSamples.get(480)));			
+		tests.add(new STestCase(binSamples.get(520),binSamples.get(-520)));
+		tests.add(new STestCase(binSamples.get(-520),binSamples.get(520)));	
+		tests.add(new STestCase(binSamples.get(631),binSamples.get(-631)));
+		tests.add(new STestCase(binSamples.get(-631),binSamples.get(631)));		
+		tests.add(new STestCase(binSamples.get(718),binSamples.get(-718)));	
 		
-		// print elements of char[4] one by one
-		System.out.print("Expecting E240, got ");
-		for (int i = 0; i < result.length; i++) {System.out.print(result[i]);}
-		
-		System.out.println();
-	}	
-	
+		for (STestCase t : tests) {	
+			test   = (char[])t.testCase;				
+			result = hw2.negateBin(test);
+			expect = (char[])t.expected;
+				
+			if(Arrays.equals(result,expect)){ nPassed++;}
+			else {printFailInfo(binArrString(test),binArrString(expect),binArrString(result));}		
+		}
+		reportScore(nPassed,tests.size());					
+	} // Ends Method _negateBin		
 	
 	//##################################################################
 	//>>> Part 4-A Tests
-	//##################################################################
-	
+	//##################################################################	
 	public void _arrayMin(){
 		printIntroBlurb("arrayMin");
 		nPassed = 0; int expect; int result;
@@ -741,17 +766,12 @@ class Tester {
 			
 		for (STestCase t : tests) {
 			result = hw2.arrayMode((int[])t.testCase);
-			expect = (int)t.expected;
-				
+			expect = (int)t.expected;				
 			if(result==expect) { nPassed++;}
 			else {printFailInfo(""+t.testCase,""+expect,""+result);}		
 		}		
-		
 		reportScore(nPassed,tests.size());		
 	} // Ends Method _arrayMode
-	
-	
-	
 	
 	//##################################################################
 	//>>> PRINT / GET-STRING / MISC. UTILS
@@ -770,7 +790,7 @@ class Tester {
 		}
 		
 		// Produces formatted version of char[16] as binary string
-		public static String char16AsBinString(char[] arr){
+		public static String binArrString(char[] arr){
 			String ret = "";
 			for(int i=0; i<arr.length; i++){
 				if(i==0) {ret+="[";}	
@@ -781,7 +801,10 @@ class Tester {
 			return ret;	
 		}
 		
-		
+		// Prints formatted version of char[16] as binary string
+		public static void printBinArr(char[] arr){
+			System.out.println(binArrString(arr));
+		}		
 		
 		
 		// Gets 1D int array as string
@@ -852,7 +875,31 @@ class Tester {
 	public static String pctPassed(int n, int p) {return String.format("%.2f", (((float)p/(float)n)*100))+"%";}
 
 	
+	// Populates Bin Samples Hashmap
+	// 0,1,-1,212,-212,480,-480,516,-516,520,-520,631,-631,718,-718
+	private void populateBinSamples() {
+		binSamples.put(   0, hw2.decToBin((short)0));
+		binSamples.put(   1, hw2.decToBin((short)1));
+		binSamples.put(  -1, hw2.negateBin(hw2.decToBin((short)1)));
+		binSamples.put( 212, hw2.decToBin((short)212));
+		binSamples.put(-212, hw2.negateBin(hw2.decToBin((short)212)));
+		binSamples.put( 480, hw2.decToBin((short)480));
+		binSamples.put(-480, hw2.negateBin(hw2.decToBin((short)480)));
+		binSamples.put( 516, hw2.decToBin((short)516));
+		binSamples.put(-516, hw2.negateBin(hw2.decToBin((short)516)));
+		binSamples.put( 520, hw2.decToBin((short)520));
+		binSamples.put(-520, hw2.negateBin(hw2.decToBin((short)520)));
+		binSamples.put( 631, hw2.decToBin((short)631));
+		binSamples.put(-631, hw2.negateBin(hw2.decToBin((short)631)));
+		binSamples.put( 718, hw2.decToBin((short)718));
+		binSamples.put(-718, hw2.negateBin(hw2.decToBin((short)718)));
+	}
 	
-	
+	private char[] numsToCharArr(String vals) {
+		char[] ret = new char[16];	
+		String[] asStr = vals.split(",");		
+		for (int i = 0; i < 16; i++) {ret[i] = asStr[i].trim().charAt(0);}				
+		return ret;
+	}
 
 } // Ends Class Tester
