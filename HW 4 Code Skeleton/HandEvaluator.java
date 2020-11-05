@@ -2,10 +2,9 @@ import java.util.HashMap;
 
 public class HandEvaluator {
 	
-
 	
-	
-	// ~~~BEHOLD THE LONGEST TERNARY SEQUENCE YOU'VE [likely] EVER SEEN~~~
+	//##################################################################	
+	// ~BEHOLD! THE LONGEST TERNARY SEQUENCE YOU'VE [likely] EVER SEEN~
 	public static HandType evaluate(Hand h){
 		return	(isFiveOfKind(h))    ? HandType.FIVE_OF_KIND   :
 				(isRoyalFlush(h))    ? HandType.ROYAL_FLUSH    :
@@ -20,8 +19,9 @@ public class HandEvaluator {
 					                   HandType.HIGH_CARD;
 	}
 	
-	private static boolean isFiveOfKind(Hand h){
-		
+	
+	//##################################################################
+	private static boolean isFiveOfKind(Hand h){	
 		h.sortBySuit();
 		
 		int numJokers = 0;	
@@ -50,16 +50,18 @@ public class HandEvaluator {
 	}
 	
 	
+	//##################################################################	
 	private static boolean isRoyalFlush(Hand h) {
 		
-		// Let's first [dis]qualify the suit condition...
+		// Let's first qualify the suit condition...
 		if(h.cards[0].getSuit() == h.cards[1].getSuit() &&
-		   h.cards[0].getSuit() == h.cards[1].getSuit() &&
-		   h.cards[0].getSuit() == h.cards[1].getSuit() &&
-		   h.cards[0].getSuit() == h.cards[1].getSuit() &&
-		   h.cards[0].getSuit() == h.cards[1].getSuit() ){
+		   h.cards[1].getSuit() == h.cards[2].getSuit() &&
+		   h.cards[2].getSuit() == h.cards[3].getSuit() &&
+		   h.cards[3].getSuit() == h.cards[4].getSuit() ){
+			
+			h.sortByValue();		
 
-			// Now we'll [dis]qualify the rank condition...
+			// Now we'll qualify the rank condition...
 			if( h.cards[0].equals(Rank.TEN)   &&
 				h.cards[1].equals(Rank.JACK)  &&	
 				h.cards[2].equals(Rank.QUEEN) &&		
@@ -74,12 +76,13 @@ public class HandEvaluator {
 	}		
 	
 	
-	// yeah, yeah... being lazy on this one (though it would otherwise be copy-paste of both methods, so...)
+	//##################################################################	
 	private static boolean isStraightFlush(Hand h) {	
 		return (isFlush(h) && isStraight(h));
 	}	
 	
 	
+	//##################################################################	
 	private static boolean isFourOfKind(Hand h){			
 		HashMap<Rank, Integer> tally = new HashMap<Rank, Integer>();
 		int numJokers = getNumJokers(h);
@@ -100,11 +103,42 @@ public class HandEvaluator {
 	}
 	
 	
+	//##################################################################	
 	private static boolean isFullHouse(Hand h){
-		return false; // STUB
+		HashMap<Rank, Integer> tally = new HashMap<Rank, Integer>();
+		int numJokers = getNumJokers(h);	
+		
+		if(numJokers==2) {return false;}
+		
+		boolean hasTriplet = false;
+		int numDoubles     = 0;
+
+		// get frequency of cards by rank
+		for (Card c : h.cards) {		
+			tally.put(c.getRank(), tally.containsKey(c.getRank()) ? tally.get(c.getRank())+1 : 1);	
+		}		
+		
+		// qualify triplet and number of pairs
+		for (Integer val : tally.values()) {	
+			if(val==3){hasTriplet = true;}
+			if(val==2){numDoubles ++;}
+		}
+		
+		// if joker and two pairs: joker forms triplet with one of them -> return true
+		if( (numJokers == 1) && (numDoubles == 2) ) {
+			return true;
+		}
+		
+		// triplet and one pair is the very definition of full house -> return true
+		if (hasTriplet && (numDoubles == 1) ) {
+			return true;
+		}
+			
+		return false;
 	}	
 	
-	
+
+	//##################################################################
 	private static boolean isFlush(Hand h){	
 		// init this value with # of jokers, as they count!
 		int numSameSuit = getNumJokers(h);
@@ -118,7 +152,8 @@ public class HandEvaluator {
 		return (numSameSuit==h.cards.length);	
 	}	
 
-	
+
+	//##################################################################
 	private static boolean isStraight(Hand h){
 		int i = getNumJokers(h);
 		
@@ -130,13 +165,13 @@ public class HandEvaluator {
 			if(h.cards[i-1].getRankValue()+1 != h.cards[i].getRankValue()){
 				return false;
 			}
-		}
-		
+		}	
 		// note how return value is true this time i.e. 'disqual-else-qual' -vs- 'qual-else-disqual'
 		return true;
 	}	
 	
 	
+	//##################################################################
 	private static boolean isThreeOfKind(Hand h){
 		HashMap<Rank, Integer> tally = new HashMap<Rank, Integer>();
 		int numJokers = getNumJokers(h);
@@ -157,10 +192,7 @@ public class HandEvaluator {
 	}	
 	
 	
-	// we assume that the "is<type>(...)" methods are called from highest to lowest ranking hand.
-	// if that's the case - we do NOT need to handle jokers! If there are two jokers, they could
-	// work with any other card to form a three-of-a-kind; if there is one joker and a pair, the
-	// same scenario would occur and the hand would be judged as three-of-a-kind.
+	//##################################################################
 	private static boolean isTwoPair(Hand h){
 		HashMap<Rank, Integer> tally = new HashMap<Rank, Integer>();
 		
@@ -171,16 +203,14 @@ public class HandEvaluator {
 		int numPairsSeen = 0;
 		
 		for (Integer val : tally.values()) {	
-			if(val==2) {
-				numPairsSeen++;;
-			}
+			if(val==2) {numPairsSeen++;}
 		}
 
 		return (numPairsSeen==2);			
 	}	
 	
 	
-	// we likewise assume two-pair and above have already been disqualified...
+	//##################################################################
 	private static boolean isPair(Hand h){	
 		// short-circuit: joker and any other card makes a pair
 		if(getNumJokers(h)>0) {return true;}
@@ -191,15 +221,13 @@ public class HandEvaluator {
 			tally.put(c.getRank(), tally.containsKey(c.getRank()) ? tally.get(c.getRank())+1 : 1);	
 		}
 		
-		for (Integer val : tally.values()) {	
-			if(val==2){return true;}
-		}		
+		for (Integer val : tally.values()) {if(val==2){return true;}}		
 		
 		return false;
 	}
 
 
-	
+	//##################################################################
 	// Be careful - this will sort the hand by suit: so expect/handle this accordingly!
 	private static int getNumJokers(Hand h) {	
 		h.sortBySuit();

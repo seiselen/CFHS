@@ -1,5 +1,4 @@
-
-public enum HandType{
+public enum HandType {
 	FIVE_OF_KIND,
 	ROYAL_FLUSH,
 	STRAIGHT_FLUSH,
