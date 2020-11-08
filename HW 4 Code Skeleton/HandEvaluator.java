@@ -34,25 +34,21 @@ public class HandEvaluator {
 		if(numJokers==0) {return false;}
 		
 		// transitivity: c1=c2 ^ c2=c3 -> c1=c3 -> c1=c2=c3
-		if(h.cards[1].equals(h.cards[0].getRank()) && 
-		   h.cards[2].equals(h.cards[1].getRank()) ){
-			
+		if(h.cards[0].equals(h.cards[1].getRank()) && 
+		   h.cards[1].equals(h.cards[2].getRank()) ){		
 			if(numJokers==2) {return true;}
 			
-			// 'mechanically' guaranteed that numJokers==1 and rank of cards 1/2/3 are same if we're in this code
-			if(h.cards[3].equals(h.cards[2].getRank())){
+			// numJokers==1 and first 3 card ranks are same at this point
+			if(h.cards[2].equals(h.cards[3].getRank())){
 				return true;
 			}
-		
-		}
-			
+		}			
 		return false;
 	}
 	
 	
 	//##################################################################	
 	private static boolean isRoyalFlush(Hand h) {
-		
 		// Let's first qualify the suit condition...
 		if(h.cards[0].getSuit() == h.cards[1].getSuit() &&
 		   h.cards[1].getSuit() == h.cards[2].getSuit() &&
@@ -70,8 +66,6 @@ public class HandEvaluator {
 				return true;
 			}
 		}
-
-		// "all roads go to Rome" : both disqualify conditions wind up here i.e. share the same 'return false'
 		return false;
 	}		
 	
@@ -125,15 +119,10 @@ public class HandEvaluator {
 		}
 		
 		// if joker and two pairs: joker forms triplet with one of them -> return true
-		if( (numJokers == 1) && (numDoubles == 2) ) {
-			return true;
-		}
+		if( (numJokers == 1) && (numDoubles == 2) ) {return true;}
 		
 		// triplet and one pair is the very definition of full house -> return true
-		if (hasTriplet && (numDoubles == 1) ) {
-			return true;
-		}
-			
+		if (hasTriplet && (numDoubles == 1) ) {return true;}		
 		return false;
 	}	
 	
@@ -147,6 +136,8 @@ public class HandEvaluator {
 		for (int i = 1; i < h.cards.length; i++) {
 			if (h.cards[i-1].getSuit() == h.cards[i].getSuit()) {numSameSuit++;}
 		}
+		
+		numSameSuit++;
 		
 		// h.cards.length to show easy way to support scalability(-vs- simply '5')
 		return (numSameSuit==h.cards.length);	
@@ -162,9 +153,7 @@ public class HandEvaluator {
 		
 		// neat use of numJokers, eh?!? we're also again looking at predecessors
 		for(i+=1;i<h.cards.length; i++){
-			if(h.cards[i-1].getRankValue()+1 != h.cards[i].getRankValue()){
-				return false;
-			}
+			if(h.cards[i-1].getRankValue()+1 != h.cards[i].getRankValue()){return false;}
 		}	
 		// note how return value is true this time i.e. 'disqual-else-qual' -vs- 'qual-else-disqual'
 		return true;
@@ -183,9 +172,7 @@ public class HandEvaluator {
 		
 		// qualify...
 		for (Integer val : tally.values()) {	
-			if((val==3) || (numJokers==1 && val==2) || (numJokers==2 && val==1)) {
-				return true;
-			}
+			if((val==3) || (numJokers==1 && val==2) || (numJokers==2 && val==1)) {return true;}
 		}
 		// ...else disqualify
 		return false;
@@ -202,9 +189,7 @@ public class HandEvaluator {
 		
 		int numPairsSeen = 0;
 		
-		for (Integer val : tally.values()) {	
-			if(val==2) {numPairsSeen++;}
-		}
+		for (Integer val : tally.values()) { if(val==2) {numPairsSeen++;}}
 
 		return (numPairsSeen==2);			
 	}	
@@ -228,7 +213,6 @@ public class HandEvaluator {
 
 
 	//##################################################################
-	// Be careful - this will sort the hand by suit: so expect/handle this accordingly!
 	private static int getNumJokers(Hand h) {	
 		h.sortBySuit();
 		
@@ -236,8 +220,7 @@ public class HandEvaluator {
 		if(h.cards[4].equals(Rank.JOKER, Suit.JOKER)){
 			numJokers++;
 			if(h.cards[3].equals(Rank.JOKER, Suit.JOKER)){numJokers++;}		
-		}
-		
+		}	
 		return numJokers;		
 	}
 
