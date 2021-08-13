@@ -43,15 +43,6 @@ var data_javaBasics = [
     rNLnk: ""
   },
 
-  { name: "Characters in Java",
-    r1Src: str_w3s,
-    r2Src: "",
-    rNSrc: str_tbd,
-    r1Lnk: "https://docs.oracle.com/javase/tutorial/java/data/characters.html",
-    r2Lnk: "",
-    rNLnk: ""
-  },
-
   { name: "Booleans (and Operations)",
     r1Src: str_w3s,
     r2Src: str_prT,
@@ -160,12 +151,65 @@ var data_javaBasics = [
     rNLnk: ""
   },
 
-/*
+  { name: "Enums / Use Thereof",
+    r1Src: str_w3s,
+    r2Src: str_orc,
+    rNSrc: str_tbd,   
+    r1Lnk: "https://www.w3schools.com/java/java_enums.asp",
+    r2Lnk: "https://docs.oracle.com/javase/tutorial/java/javaOO/enum.html",
+    rNLnk: ""
+  },
+
+  { name: "Intro to Strings / Basic Operations",
+    r1Src: str_w3s,
+    r2Src: str_orc,
+    rNSrc: str_tbd,   
+    r1Lnk: "https://www.w3schools.com/java/java_strings.asp",
+    r2Lnk: "https://docs.oracle.com/javase/tutorial/java/data/strings.html",
+    rNLnk: ""
+  },
+
+  { name: "Characters and String Modification",
+    r1Src: str_orc,
+    r2Src: str_orc,
+    rNSrc: str_tbd,
+    r1Lnk: "https://docs.oracle.com/javase/tutorial/java/data/characters.html",
+    r2Lnk: "https://docs.oracle.com/javase/tutorial/java/data/manipstrings.html",
+    rNLnk: ""
+  },
+
+  { name: "More String Operations",
+    r1Src: str_orc,
+    r2Src: str_orc,
+    rNSrc: str_tbd,
+    r1Lnk: "https://www.w3schools.com/java/java_ref_string.asp",
+    r2Lnk: "https://docs.oracle.com/javase/tutorial/java/data/comparestrings.html",
+    rNLnk: ""
+  },
 
 
+/*>>> TBD
 
+Intro to Objects
+Intro to Classes
+Intro to Methods
+Method Parms / Args / Return Types
+Method Overloading
+Class Methods
+Class Attributes
+Constructors
+Intro to Recursion
+Scope (Block/Method/Class)
+Intro to Arrays
+1D Arrays and Operations
+2D Arrays and Operations
+Intro to Lambda Statements / Calculus
 
-
+String Print Format / Special Chars
+Wrapper Classes and parseInt/Float/etc.
+Misc Java Util Classes (Time/Date)
+Intro to Files and File-Types/Sizes
+Java Scanner (Intro to User Input)
 
 */
 
