@@ -179,7 +179,7 @@ var data_javaBasics = [
   },
 
   { name: "More String Operations",
-    r1Src: str_orc,
+    r1Src: str_w3s,
     r2Src: str_orc,
     rNSrc: str_tbd,
     r1Lnk: "https://www.w3schools.com/java/java_ref_string.asp",
@@ -187,12 +187,37 @@ var data_javaBasics = [
     rNLnk: ""
   },
 
+  { name: "Intro to [Java] Objects",
+    r1Src: str_orc,
+    r2Src: str_w3s,
+    rNSrc: str_tbd,
+    r1Lnk: "https://docs.oracle.com/javase/tutorial/java/concepts/object.html",
+    r2Lnk: "https://www.w3schools.com/java/java_classes.asp",
+    rNLnk: ""
+  },
+
+  { name: "Intro to [Java] Classes",
+    r1Src: str_orc,
+    r2Src: str_w3s,
+    rNSrc: str_tbd,
+    r1Lnk: "https://docs.oracle.com/javase/tutorial/java/concepts/class.html",
+    r2Lnk: "https://www.w3schools.com/java/java_classes.asp",
+    rNLnk: ""
+  },
+
+  { name: "Intro to [Java] Methods",
+    r1Src: str_w3s,
+    r2Src: str_orc,
+    rNSrc: str_tbd,
+    r1Lnk: "https://www.w3schools.com/java/java_methods.asp",
+    r2Lnk: "https://docs.oracle.com/javase/tutorial/java/javaOO/methods.html",
+    rNLnk: ""
+  },
+
+
 
 /*>>> TBD
 
-Intro to Objects
-Intro to Classes
-Intro to Methods
 Method Parms / Args / Return Types
 Method Overloading
 Class Methods
