@@ -1,3 +1,7 @@
-# CFHS Code Snippets / Examples
+# CFHS Computer Science Repo
 
-## Various Code Snippets and Examples for CFHS FH-4710/4750 SY 2020-2021
+## Contains:
+
+### 'Master Topics List' (with links to study/reference resources and my discussion notes)
+
+### Code Samples/Examples (including those worked on in class)
