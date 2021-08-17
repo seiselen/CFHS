@@ -6,8 +6,13 @@
     <style>
       body {color: darkblue; font-family:verdana;}
       th { background-color: darkblue; color: white;}
-      table, th, td {border: 1px dotted darkblue; border-collapse: collapse; white-space:nowrap;}
-      th, td {padding: 8px;}
+      table {border: 1px solid darkblue;}
+      table, th, td {border-bottom: 1px dashed rgb(216, 216, 216); border-collapse: collapse; white-space:nowrap; font-size: .9em;}
+      th, td {padding-left: 8px; padding-right: 4px; padding-top: 4px; padding-bottom: 4px;}
+      #header {margin-top: 16px; margin-bottom: 8px;}
+      #byline {margin-top: 8px; margin-bottom: 8px;}
+
+
     </style>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
@@ -15,15 +20,10 @@
     <script src="data.js"></script>
   </head>
   <body>
-  	<h1>CFHS-CS : Master Topics/Resources List</h1>
-
-    <h2>Foundations and Building Blocks</h2>
-
+  	<h1 id="header">CFHS-CS : Master Topics/Resources List</h1>
+    <h2 id="byline">Foundations and Building Blocks</h2>
       <table id="java_basics" class="topicTable_1" style="width:800px">
-        <tr>
-          <th>[Sub]Topic</th><th>Primary Resource</th><th>Secondary Resource</th><th>Discussion Notes</th>                    
-        </tr>
+        <tr><th style="text-align: left;">[Sub]Topic</th><th>Primary Resource</th><th>Secondary Resource</th><th>Discussion Notes</th></tr>
       </table>
-
   </body>
 </html>
