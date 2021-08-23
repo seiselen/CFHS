@@ -1,0 +1,56 @@
+public static String charsInSentence(String sentence)
+# Purpose: Return a string of unique characters such that the appearence of a character implies it appears at least once in the input string sentence. The only characters that need to be supported are those of ASCII range [32...127] (decimal index). Data Structure classes from the Java Collections Framework may be used to solve this problem.
+# Input: String sentence – the input sentence
+# Hint 1: You're allowed to use a Data Structure from the Java Collections Framework, and we [strongly] encourage doing so. If peer pressure helps to motivate: our solution does exactly this!
+# Hint 2: Uppercase letters will now be DISTINCT from lowercase (i.e. 'q'!='Q' this time!)
+# Note: If you still want to homebrew this, and request our assistance to help you accomplish this - we will ONLY do so upon reviewing AND approving two items from your current progress. First: a correctly implemented version of this method using one of the 'Collections' data structures. Second: a correctly implemented 'lettersInSentence' method.
+
+
+public static CharAndCount[] charsCountInSentence(String sentence, char orderType)
+# Purpose: Return an array of (char,int) two-tuples such that the char component is a unique character in the ASCII range [32...127] and the int component is the total number of times (0>x) it appears in the sentence. The array elements should be ordered WRT to the type specified in the relevant input parm, for which there are two types. Type 'c' implies by-char (i.e. [{'A',10},{'B',2},{'F',35},{'a',55}]); while type 't' implies by-total in increasing order (i.e. [{'B',2},{'A',10},{'F',35},{'a',55}]). for the latter type, settle ties via by-char order (i.e. resolve [{'B',9},{'F',1},{'G',9}] as [{'B',9},{'G',9},{'F',1}], NOT as [{'G',9},{'B',9},{'F',1}]).
+# Input: String sentence - the input sentence
+         char orderType  - means of output ordering, where 'c'=>'by-char' and 't'=>'by-total'
+# Hint: Same as with 'charsInSentence', and you MIGHT want to read the note below...
+# Note: You [hopefully] might have noticed that 'CharAndCount' in the method header is not a built-in Java Class. Quite Right. You'll need to write your own, and it needs to agree with what our tester script will be expecting. Fear Not: We show you exactly what ours looks like below. You might also note that we're not using Java Encapsulation [LINK] in our definition; this is to keep things simple (though we may do so later on).
+
+public class CharAndCount{
+  /*--------------------------------------------------------------------
+  |> Object State i.e. char represented by this object and total number
+  |  of times it appeared in the input String. Note also our use of the
+  |  underscore (i.e. '_') character for the names, especially the char
+  |  variable. This is one way underscore prefixes are utilized in Java;
+  |  especially for the event that the best name is, unfortunately, also
+  |  the same name of the [data]type. Especially if such is a primitive
+  |  type or some otherwise reserved keyword in Java.
+  +-------------------------------------------------------------------*/
+  public char _char;  
+  public int  _total;
+
+  /*--------------------------------------------------------------------
+  |> This is the [object] constructor for this class. If you know what
+  |  that is, great! If not all you need to know is that to create a new
+  |  CharAndCount object, you need to do ***something*** like this:
+  |    // assuming input sentence = "banana"
+  |    CharAndCount myExample = new CharAndCount('a',3);
+  +-------------------------------------------------------------------*/
+  public CharAndCount(char chr, total tot){
+    // Here's another hint/reminder, BTW :-)
+    if(t==0){System.out.println("Appears ZERO times? Sure you wanna add it?!?");}
+    _char  = chr;
+    _total = tot;
+  } // Ends Constructor
+} // Ends Class CharAndCount
+
+
+
+public static int TicketPrice(int month, int dayOfWeek, int age, float[][]prices)
+
+# Description: This function models the cost of a ticket to some amusement venue <TODO: Easter Egg it>. The input includes: 'month' (int of range [1...12] where 1=January and 12=December); 'dayOfWeek' (int of range [1...7] where 1=Monday and 7=Sunday); 'age' (int of range 6...90 years old); and 'prices' (explained in the next sentence). The 2D array 'prices' is row-index keyed on month, and its columns provide price and discount info arranged in the following schema: {basePrice, off-season discount, weekend discount, child discount, senior discount}.
+
+
+Additional Problems via CodingBat that you'll submit solutions to via Repl (else Classroom):
+
+From 'AP-1':
+  > scoreUp
+  > sumHeights 
+  > mergeTwo
