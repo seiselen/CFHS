@@ -24,6 +24,38 @@ public static float getCommuteTime(char wType, int hour, float bTime, float[] de
   > The last sentence of the problem is another hint: you could shrink the bulk of the work down to nested control flow constructs (i.e. several nested within a primary one).
 
 
+### Instructions:
+The 'Caesar Cipher' [(Wikipedia Link)](https://en.wikipedia.org/wiki/Caesar_cipher) was used by Gaius Julius Caesar himself for his private correspondence. We'll implement the simplest version in this assignment (and maybe step things up to more intermediate cryptographic methods in future assignments). The simplest version involves an **encoding step** of 'shifting' (analogously, 'rotating') the alphabet by some number of characters **x** in one of two directions **d** {left xor right}, then a **decoding step** of shifting the characters of the encrypted message **x** characters in the opposite direction. The offset **x** and direction **d** thus become the 'keys' used to encrypt and decrypt the message. Correspondingly, implement the following two methods...
+
+### caesarCipherEncrypt
+```Java
+public static String caesarCipherEncrypt(String input, int offKey, char rotDir)
+```
+* **Purpose:** Given a message to be encrypted, an offset key, and rotation direction - encrypt the message into its corresponding encrypted form.
+* **Inputs:**
+  * `String input` - the message to be encrypted
+  * `int offKey` - the number of characters to offset when encrypting (range `[0,...,25]`)
+  * `char rotDir` - the direction `[left⊕right]` by which to offset characters (range `[0,...,25]`)
+* **Example 1:** `caesarCipherEncrypt("secret",3,'r')=> "pbzobq"
+* **Example 2:** `caesarCipherEncrypt("secret",7,'r')=> "lxvkxm"
+* **Example 3:** `caesarCipherEncrypt("secret",4,'l')=> "wigvix"
+
+### caesarCipherDecrypt
+```Java
+public static String caesarCipherDecrypt(String input, int offKey, char rotDir)
+```
+* **Purpose:** Given an encrypted message, an offset key, and rotation direction - decrypt the message back into its original non-encrypted form.
+* **Inputs:**
+  * `String input` - the encrypted message to be decrypted
+  * `int offKey` - the number of characters to offset when decrypting (range `[0,...,25]`)
+  * `char rotDir` - the direction `[left⊕right]` by which **the message was originally encrypted**
+* **Example 1:** `caesarCipherDecrypt("pbzobq",3,'r')=> "secret"
+* **Example 2:** `caesarCipherDecrypt("lxvkxm",7,'r')=> "secret"
+* **Example 3:** `caesarCipherDecrypt("wigvix",4,'l')=> "secret"
+* **Hint:** There's some text bolded in the description of parm `rotDir` for a reason.
+
+
+
 Additional Problems via CodingBat that you'll submit solutions to via Repl (else Classroom):
 
 From 'String-2':
