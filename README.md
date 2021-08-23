@@ -6,4 +6,4 @@
 
 ### Code Samples/Examples (including those worked on in class)
 
-### Assignment Specs (at least until we get Repl (fully) operational
+### Assignment Specs (at least until we get Repl {fully} operational)
